@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "brazil-rural-credit"
+version = "0.1.0"
+description = "This repository aims to provide a ready-to-deploy pipeline and analytics dashboard as a final project from the Data Engineering Zomcamp 2024 cohort."
+authors = ["folhesgabriel <pisagabriel09@gmail.com>"]
+license = "GPL-3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+prefect-gcp = "^0.5.7"
+prefect = "^2.16.6"
+dbt-core = "^1.7.8"
+dbt-bigquery = "^1.7.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
