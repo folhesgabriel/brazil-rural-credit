@@ -1,0 +1,18 @@
+
+
+#-credentials
+credentials_dezoomcamp.json
+#-test files
+test.py
+
+#dbt
+target/
+dbt_packages/
+logs/
+
+
+# Terraform state files
+terraform.tfstate
+terraform.tfstate.*
+*.tfstate
+*.tfstate.*
