@@ -133,7 +133,8 @@ def run_dbt_model(model_name)-> None:
     print(f"Running dbt model {model_name}")
     dbt_command = f"dbt run --select models/brazil_rural_credit/{model_name}"
     print(f"Running command: {dbt_command}")
-    os.system(f"{dbt_command}")
+    dbt_project_dir = "~/brazil-rural-credit/rural_credit"
+    os.system(f"cd {dbt_project_dir} && {dbt_command}")
 
 #-- Functions addapted from https://github.com/basedosdados/mais/blob/v2.0.0/python-package/basedosdados/upload/storage.py
 def build_blob_name(filename, mode,dataset_id,table_id, partitions=None):
@@ -342,62 +343,6 @@ def infer_schema_from_file(bucket_name, blob_name,extra_columns=[]):
         schema.append(bigquery.SchemaField(col_name, col_type))
         
     return schema
-
-
-def _get_columns_from_data(
-        self,
-        data_sample_path=None,
-        source_format="csv",
-        csv_delimiter=",",
-        mode="staging",
-    ):  # sourcery skip: low-code-quality
-        """
-        Get the partition columns from the structure of data_sample_path.
-
-        Args:
-            data_sample_path (str, pathlib.PosixPath): Optional.
-                Data sample path to auto complete columns names
-                It supports Comma Delimited CSV, Apache Avro and
-                Apache Parquet.
-            source_format (str): Optional
-                Data source format. Only 'csv', 'avro' and 'parquet'
-                are supported. Defaults to 'csv'.
-        """
-
-        partition_columns = []
-        if isinstance(
-            data_sample_path,
-            (
-                str,
-                Path,
-            ),
-        ):
-            # Check if partitioned and get data sample and partition columns
-            data_sample_path = Path(data_sample_path)
-
-            if data_sample_path.is_dir():
-                data_sample_path = [
-                    f
-                    for f in data_sample_path.glob("**/*")
-                    if f.is_file() and f.suffix == f".{source_format}"
-                ][0]
-
-                partition_columns = [
-                    k.split("=")[0]
-                    for k in data_sample_path.as_posix().split("/")
-                    if "=" in k
-                ]
-            columns = Datatype(source_format=source_format).header(
-                data_sample_path=data_sample_path, csv_delimiter=csv_delimiter
-            )
-
-        return {
-            "columns": [{"name": col, "type": "STRING"} for col in columns],
-            "partition_columns": [
-                {"name": col, "type": "STRING"} for col in partition_columns
-            ],
-        }
-
 
 def list_blobs_in_folder(bucket_name, folder_path):
     """
