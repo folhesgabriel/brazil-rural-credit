@@ -10,27 +10,13 @@ from prefect_pipelines.brazil_bcb_sicor.utils import (
     )
 
 
-
-
-
-# #TODO: create download folder
-
-# #NOTE: Crawler task
-# # Execução em ambiente assíncrono
-# #await main(urls)  # Para Jupyter Notebook/IPython
-# print(f'----- downloading data {urls[TABLE_ID]}')
-# main(urls[TABLE_ID])  # Para script Python regular
-
-#task do async download files and save em to a folder
-#just a task that downloads
-
 @task
 def download_files_task(urls, folder, max_parallel=5):
     
     return asyncio.run(download_files(urls=urls, folder=folder, max_parallel=max_parallel))
 
-#pre-process files read csvs 2 chunks save to parquet
 
+#---pre-process files read 
 @task
 def pre_process_files_task(folder, output_folder, table_id):
     
