@@ -1,18 +1,20 @@
-
-
 #-credentials
 credentials_dezoomcamp.json
 #-test files
 test.py
 
+#temporary folders
+tmp/*
+
 #dbt
 target/
 dbt_packages/
 logs/
-
+.gitkeep
 
 # Terraform state files
 terraform.tfstate
 terraform.tfstate.*
 *.tfstate
 *.tfstate.*
+.terraform

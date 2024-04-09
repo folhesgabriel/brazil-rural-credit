@@ -1,0 +1,128 @@
+---
+version: 2
+models:
+  - name: brazil_rural_credit__microdados_operacao
+    description: A tabela de Operações contém os microdados das contratações de crédito
+      de cada estado brasileiro. Nela, estão presentes principais informações (categoria
+      de produtor; fonte de recursos; instituição credora; produto financiado e etc)
+      das mais de 19 milhôes de operações de crédito rural registradas no SICOR no
+      período. É importante salientar que cada linha não necessariamente representa
+      uma operação completa. É possível que uma unica operação (identificada pelo
+      id_referencia_bacen) contenha diversos itens e, portanto, seja subdividida em
+      ordens.
+    columns:
+      - name: ano
+        description: Ano da emissão da operação
+      - name: mes
+        description: Mês de emissão da operação
+      - name: data_emissao
+        description: Data de emissão da operação
+      - name: ano_vencimento
+        description: Ano de vencimento da operação
+      - name: mes_vencimento
+        description: Mês de vencimento da operação
+      - name: data_vencimento
+        description: Data de vencimento da operação
+      - name: plano_safra_emissao
+        description: Plano safra de emissao da operação
+      - name: plano_safra_vencimento
+        description: Plano safra de vencimento da operação
+      - name: sigla_uf
+        description: Sigla da Unidade da Federação
+      - name: id_referencia_bacen
+        description: Identificador único de cada operação de crédito
+      - name: numero_ordem
+        description: Identificador da quantidade de ordens que compõem uma operação
+          de crédito
+      - name: id_categoria_emitente
+        description: Identificador da categoria do emitente
+      - name: id_empreendimento
+        description: Identificador do empreendimento
+      - name: id_fase_ciclo_producao
+        description: Identificador da fase ciclo de produção
+      - name: id_fonte_recurso
+        description: Identificador da fonte de recursos
+      - name: id_instrumento_credito
+        description: Identificador do instrumento de crédito
+      - name: id_programa
+        description: Identificador do programa cujo crédito concedido está relacionado
+      - name: id_referencia_bacen_investimento
+        description: Identificador do refbacen de investimento
+      - name: id_subprograma
+        description: Identificador do subprograma
+      - name: id_tipo_agricultura
+        description: Identificador do tipo de agricultura
+      - name: id_tipo_cultivo
+        description: Identificador do tipo de cultivo
+      - name: id_tipo_encargo_financeiro
+        description: Identificador do tipo de encargos financeiros
+      - name: id_tipo_grao_semente
+        description: Identificador do tipo de grão/semente
+      - name: id_tipo_integracao_consorcio
+        description: Identificador do tipo de integração/consórcio
+      - name: id_tipo_irrigacao
+        description: Identificador de tipo de irrigação
+      - name: id_tipo_seguro
+        description: Identificador do tipo de seguro
+      - name: cnpj_agente_investimento
+        description: Concedente da operação de investimento
+      - name: cnpj_basico_instituicao_financeira
+        description: CNPJ da instituição financeira concedente do crédito
+      - name: id_contrato_sistema_tesouro_nacional
+        description: Código da Secretaria do Tesouro Nacional
+      - name: cnpj_cadastrante
+        description: O BACEN não fornece descrição dessa variável nos metadados
+      - name: data_fim_colheita
+        description: Data do fim de colheita
+      - name: data_fim_plantio
+        description: Data do fim de plantio
+      - name: data_inicio_colheita
+        description: Data do início de colheita
+      - name: data_inicio_plantio
+        description: Data do início de plantio
+      - name: area_financiada
+        description: Área financiada
+      - name: valor_aliquota_proagro
+        description: Valor da alíquota do Proagro
+      - name: valor_parcela_credito
+        description: Valor da parcela de crédito
+      - name: valor_prestacao_investimento
+        description: Valor da prestação de investimento
+      - name: valor_recurso_proprio
+        description: Valor do recurso próprio
+      - name: valor_receita_bruta_esperada
+        description: Valor da receita bruta esperada
+      - name: valor_recurso_proprio_srv
+        description: Garantia de renda mínima do Sistema de Valores a Receber (SRV)
+      - name: valor_quantidade_itens_financiados
+        description: Valor da quantidade de itens financiados
+      - name: valor_produtividade_obtida
+        description: Valor da produtividade obtida
+      - name: valor_previsao_producao
+        description: Valor da previsão de produção
+      - name: taxa_juro
+        description: Taxa de juros
+      - name: taxa_juro_encargo_financeiro_posfixado
+        description: Taxa de juros do encargo financeiro
+      - name: valor_percentual_custo_efetivo_total
+        description: Valor percentual do custo efetivo total
+      - name: valor_percentual_risco_fundo_constitucional
+        description: Valor percentual do risco do fundo constitucional
+      - name: valor_percentual_risco_stn
+        description: Valor percentual risco da Secretaria do Tesouro Nacional (STN)
+  - name: brazil_rural_credit__recurso_publico_complemento_operacao
+    description: Em 2023 o Banco Central do Brasil (BCB) liberou informações adicionais
+      das operações de crédito que foram financiadas com recursos públicos.
+    columns:
+      - name: id_referencia_bacen
+        description: Identificador único de cada operação de crédito
+      - name: id_municipio
+        description: ID município 7 dígitos
+      - name: numero_ordem
+        description: Identificador da quantidade de ordens que compõem uma operação
+          de crédito
+      - name: id_referencia_bacen_efetivo
+        description: Identificador único de cada operação de crédito explícito
+      - name: id_agencia
+        description: Identificador da agência da Instituição Financeira
+  
