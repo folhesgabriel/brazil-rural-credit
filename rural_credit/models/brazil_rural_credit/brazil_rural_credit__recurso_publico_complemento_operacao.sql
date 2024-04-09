@@ -13,4 +13,4 @@ select
     safe_cast(numero_ordem as string) numero_ordem,
     safe_cast(id_referencia_bacen_efetivo as string) id_referencia_bacen_efetivo,
     safe_cast(id_agencia as string) id_agencia
-from `basedosdados-dev.br_bcb_sicor_staging.recurso_publico_complemento_operacao` as t
+from `de-zoomcamp-2k24.brazil_rural_credit_staging.recurso_publico_complemento_operacao` as t
