@@ -1,35 +1,19 @@
 
 import pandas as pd
-from io import StringIO, BytesIO
-from tqdm.asyncio import tqdm
-import gzip
-import os
-import requests
-
-
-
-import aiohttp
-import asyncio
-import os
-from aiohttp import ClientSession
-from tqdm.asyncio import tqdm
-
-
-import io
 from io import StringIO
-from pathlib import Path
-
+from tqdm.asyncio import tqdm
 from tqdm import tqdm
-
-import pandas as pd
+import os
+import aiohttp
+from aiohttp import ClientSession
+import asyncio
+from pathlib import Path
 import csv
 
 from google.cloud import storage, bigquery
 from typing import Any, Dict, List, Optional, Tuple, Union
 from prefect_pipelines.brazil_bcb_sicor.constants import Constants
-import pandas as pd
-import os
-from pyarrow import parquet as pq
+
 
 
 
