@@ -11,7 +11,7 @@ from prefect_pipelines.brazil_bcb_sicor.utils import (
 
 
 @task
-def download_files_task(urls, folder, max_parallel=5):
+def download_files_task(urls, download_folder=, max_parallel:int = 5):
     
     return asyncio.run(download_files(urls=urls, folder=folder, max_parallel=max_parallel))
 
@@ -44,7 +44,9 @@ def create_dataset_and_table_with_inferred_schema_task(project_id, dataset_id, t
         table_id=table_id,
         bucket_name=bucket_name,
     )
-    
+
+
+#--- triggers a dbt model run
 @task
 def run_dbt_model_task(model_name: str):
     

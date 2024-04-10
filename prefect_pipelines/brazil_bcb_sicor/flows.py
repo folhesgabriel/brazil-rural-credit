@@ -13,7 +13,6 @@ from prefect_pipelines.brazil_bcb_sicor.task import (
 BUCKET = os.environ.get("GCP_GCS_BUCKET", "de-zoomcamp-2k24")
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/gabri/brazil-rural-credit/credentials_dezoomcamp.json"
 PROJECT_ID = 'de-zoomcamp-2k24'
-PATH_DATA = f'/home/gabri/brazil-rural-credit/tmp/output/microdados_2013.csv'
 
 #TODO: SET BUCKET, GCP, PROJECT_ID as env vars;
 
