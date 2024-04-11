@@ -6,16 +6,19 @@ class Constants(Enum):
     Constants for brazil_bcb_sicor.
     """
     
-    INPUT_FOLDER = 'tmp/raw_data'
-    OUTPUT_FOLDER = 'tmp/preprocessed_data'
+    #- Folders 
+    INPUT_FOLDER = f'tmp/raw_data'
+    OUTPUT_FOLDER = f'tmp/preprocessed_data'
     
     
+    #- URLs
     URLS = {
-        'microdados_operacao' : [f'https://www.bcb.gov.br/htms/sicor/DadosBrutos/SICOR_OPERACAO_BASICA_ESTADO_{year}.gz' for year in range(2013, 2015)],
+        'microdados_operacao' : [f'https://www.bcb.gov.br/htms/sicor/DadosBrutos/SICOR_OPERACAO_BASICA_ESTADO_{year}.gz' for year in range(2013, 2024)],
         'recurso_publico_complemento_operacao' : ['https://www.bcb.gov.br/htms/sicor/DadosBrutos/SICOR_COMPLEMENTO_OPERACAO_BASICA.gz'],
         }
     
     
+    #- Data Types
     DTYPES = {
         'microdados_operacao': {
             'DT_EMISSAO': str,
@@ -68,7 +71,7 @@ class Constants(Enum):
             'VL_PERC_RISCO_STN': float,
         },
         
-        'recurso_publico_complemento': {
+        'recurso_publico_complemento_operacao': {
             'NU_ORDEM': str,
             '#REFBACEN': str,
             'REF_BACEN_EFETIVO' : str,
@@ -77,7 +80,9 @@ class Constants(Enum):
         }
     }
     
+    #- Column Names
     COL_NAMES = {
+        
         'microdados_operacao': {
             
             'NU_ORDEM': 'numero_ordem',
@@ -128,7 +133,7 @@ class Constants(Enum):
             'CD_CNPJ_CADASTRANTE' : 'cnpj_cadastrante',
         },
         
-        'recurso_publico_complemento' : {
+        'recurso_publico_complemento_operacao' : {
             
             'NU_ORDEM': 'numero_ordem',
             '#REFBACEN': 'id_referencia_bacen',

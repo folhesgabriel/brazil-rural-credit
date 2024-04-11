@@ -2,7 +2,7 @@ from prefect import flow
 import os
 
 from prefect_pipelines.brazil_bcb_sicor.constants import Constants as bcb_contants
-from prefect_pipelines.brazil_bcb_sicor.task import (
+from prefect_pipelines.brazil_bcb_sicor.tasks import (
     upload_to_gcs_task,
     create_dataset_and_table_with_inferred_schema_task,
     download_files_task,
@@ -14,6 +14,7 @@ BUCKET = os.environ.get("GCP_GCS_BUCKET", "de-zoomcamp-2k24")
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/gabri/brazil-rural-credit/credentials_dezoomcamp.json"
 PROJECT_ID = 'de-zoomcamp-2k24'
 
+
 #TODO: SET BUCKET, GCP, PROJECT_ID as env vars;
 
 
@@ -21,19 +22,18 @@ PROJECT_ID = 'de-zoomcamp-2k24'
 def brazil_bcb_sicor_complemento_operacao_flow(
     DATASET_ID: str = 'brazil_rural_credit', 
     TABLE_ID: str = 'recurso_publico_complemento_operacao',
-    DBT_MODEL_NAME:str = "brazil_rural_credit__recurso_publico_complemento_operacao.sql"
+    DBT_MODEL_NAME:str = "brazil_rural_credit__recurso_publico_complemento_operacao.sql",
     ):
 
     
     download_files_task(
         urls=bcb_contants.URLS.value[TABLE_ID],
-        folder=bcb_contants.INPUT_FOLDER.value,
-        max_parallel=5,
+        download_folder=bcb_contants.INPUT_FOLDER.value,
+        table_id=TABLE_ID,
     )
     
     pre_process_files_task(
-        folder=bcb_contants.INPUT_FOLDER.value,
-        output_folder=bcb_contants.OUTPUT_FOLDER.value,
+        download_folder=bcb_contants.OUTPUT_FOLDER.value,
         table_id=TABLE_ID,
     )
     
@@ -41,7 +41,7 @@ def brazil_bcb_sicor_complemento_operacao_flow(
         bucket_name=BUCKET,
         dataset_id=DATASET_ID,
         table_id=TABLE_ID,
-        path=bcb_contants.OUTPUT_FOLDER.value,
+        download_folder=bcb_contants.OUTPUT_FOLDER.value,
     )
     
     create_dataset_and_table_with_inferred_schema_task(
@@ -63,13 +63,12 @@ def brazil_bcb_sicor_microdados_operacoes_flow(
     
     download_files_task(
         urls=bcb_contants.URLS.value['microdados_operacao'],
-        folder=bcb_contants.INPUT_FOLDER.value,
-        max_parallel=5,
+        download_folder=bcb_contants.INPUT_FOLDER.value,
+        table_id=TABLE_ID,
     )
     
     pre_process_files_task(
-        folder=bcb_contants.INPUT_FOLDER.value,
-        output_folder=bcb_contants.OUTPUT_FOLDER.value,
+        download_folder=bcb_contants.OUTPUT_FOLDER.value,
         table_id=TABLE_ID,
     )
     
@@ -77,7 +76,7 @@ def brazil_bcb_sicor_microdados_operacoes_flow(
         bucket_name=BUCKET,
         dataset_id=DATASET_ID,
         table_id=TABLE_ID,
-        path=bcb_contants.OUTPUT_FOLDER.value,
+        download_folder=bcb_contants.OUTPUT_FOLDER.value,
     )
     
     create_dataset_and_table_with_inferred_schema_task(
@@ -92,3 +91,4 @@ def brazil_bcb_sicor_microdados_operacoes_flow(
 
 
 brazil_bcb_sicor_complemento_operacao_flow()
+brazil_bcb_sicor_microdados_operacoes_flow()
