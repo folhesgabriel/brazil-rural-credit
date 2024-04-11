@@ -84,7 +84,7 @@ async def download_files(urls: List[str], download_folder: str, table_id: str, m
         await asyncio.gather(*tasks)
 
 
-def pre_process_files(download_folder: str, table_id: str) -> None:
+def pre_process_files(download_folder: str, pre_process_files_folder:str,table_id: str) -> None:
     """
     Pre-processes files by renaming columns and saving them as Parquet chunks.
     
@@ -93,8 +93,10 @@ def pre_process_files(download_folder: str, table_id: str) -> None:
         table_id (str): The table ID.
     """
     table_id_path = os.path.join(download_folder, table_id)
+    pre_process_files_folder = os.path.join(pre_process_files_folder, table_id)
+    
     os.makedirs(table_id_path, exist_ok=True)
-
+    print(f"Pre-processing files in {table_id_path}.")
     DTYPES: Dict[str, Any] = Constants.DTYPES.value[table_id]
     COL_NAMES: Dict[str, str] = Constants.COL_NAMES.value[table_id]
 
@@ -117,7 +119,12 @@ def pre_process_files(download_folder: str, table_id: str) -> None:
             chunk = chunk.rename(columns=COL_NAMES)
 
             chunk_filename = f"{base_filename}_chunk_{i}.parquet"
-            chunk.to_parquet(os.path.join(table_id_path, chunk_filename), index=False)
+            chunk.to_parquet(
+                os.path.join(
+                    pre_process_files_folder, 
+                    chunk_filename), 
+                index=False,
+                engine='gzip')
             
             print(f"Chunk {i} of file {base_filename} saved as {chunk_filename}.")
 
@@ -304,7 +311,7 @@ def resolve_partitions(partitions: Union[Dict[str, str], str]) -> str:
     raise Exception(f"Partitions format or type not accepted: {partitions}")
 
 
-def upload_to_gcs(bucket_name: str, dataset_id: str, table_id: str, download_folder: str) -> None:
+def upload_to_gcs(bucket_name: str, dataset_id: str, table_id: str, pre_process_files_folder: str) -> None:
     """
     Uploads files to the specified GCS bucket. Handles both individual files and directories, maintaining Hive partitioning format.
 
@@ -317,10 +324,11 @@ def upload_to_gcs(bucket_name: str, dataset_id: str, table_id: str, download_fol
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
     
-    table_id_path = os.path.join(download_folder, table_id)
+    table_id_path = os.path.join(pre_process_files_folder, table_id)
 
     path = Path(table_id_path)
 
+    print(f"Uploading files from {path} to gs://{bucket_name}/staging/{dataset_id}/{table_id}/")
     if path.is_dir():
         # Extract paths
         paths = [

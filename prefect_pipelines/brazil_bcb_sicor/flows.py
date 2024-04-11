@@ -33,15 +33,16 @@ def brazil_bcb_sicor_complemento_operacao_flow(
     )
     
     pre_process_files_task(
-        download_folder=bcb_contants.OUTPUT_FOLDER.value,
-        table_id=TABLE_ID,
+         download_folder=bcb_contants.INPUT_FOLDER.value,
+         pre_process_files_folder=bcb_contants.OUTPUT_FOLDER.value,
+         table_id=TABLE_ID,
     )
     
     upload_to_gcs_task(
         bucket_name=BUCKET,
         dataset_id=DATASET_ID,
         table_id=TABLE_ID,
-        download_folder=bcb_contants.OUTPUT_FOLDER.value,
+        pre_process_files_folder=bcb_contants.OUTPUT_FOLDER.value,
     )
     
     create_dataset_and_table_with_inferred_schema_task(
@@ -68,7 +69,7 @@ def brazil_bcb_sicor_microdados_operacoes_flow(
     )
     
     pre_process_files_task(
-        download_folder=bcb_contants.OUTPUT_FOLDER.value,
+        download_folder=bcb_contants.INPUT_FOLDER.value,
         table_id=TABLE_ID,
     )
     

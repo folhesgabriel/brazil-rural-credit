@@ -25,7 +25,6 @@ class Constants(Enum):
             'DT_VENCIMENTO': str,
             'CD_ESTADO': str,
             '#REF_BACEN': str,
-            'REFBACEN': str,
             'NU_ORDEM': str,
             'CD_CATEG_EMITENTE': str,
             'CD_EMPREENDIMENTO': str,
@@ -73,7 +72,7 @@ class Constants(Enum):
         
         'recurso_publico_complemento_operacao': {
             'NU_ORDEM': str,
-            '#REFBACEN': str,
+            '#REF_BACEN': str,
             'REF_BACEN_EFETIVO' : str,
             'AGENCIA_IF' : str,
             'CD_IBGE_MUNICIPIO' : str
@@ -86,6 +85,7 @@ class Constants(Enum):
         'microdados_operacao': {
             
             'NU_ORDEM': 'numero_ordem',
+            '#REFBACEN': 'id_referencia_bacen',
             '#REF_BACEN': 'id_referencia_bacen',
             'CD_ESTADO': 'sigla_uf',
             'CD_CATEG_EMITENTE': 'id_categoria_emitente',
@@ -137,6 +137,7 @@ class Constants(Enum):
             
             'NU_ORDEM': 'numero_ordem',
             '#REFBACEN': 'id_referencia_bacen',
+            '#REF_BACEN': 'id_referencia_bacen',
             'REF_BACEN_EFETIVO' : 'id_referencia_bacen_efetivo',
             'AGENCIA_IF' : 'id_agencia',
             'CD_IBGE_MUNICIPIO' : 'id_municipio',

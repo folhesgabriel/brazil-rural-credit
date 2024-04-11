@@ -35,7 +35,7 @@ def download_files_task(urls: List[str], download_folder: str, table_id: str, ma
 
 
 @task
-def pre_process_files_task(download_folder: str, table_id: str):
+def pre_process_files_task(download_folder: str, table_id: str,pre_process_files_folder:str):
     """
     Pre-processes the files in the specified download folder.
     
@@ -46,11 +46,11 @@ def pre_process_files_task(download_folder: str, table_id: str):
     Returns:
         None
     """
-    return pre_process_files(download_folder=download_folder, table_id=table_id)
+    return pre_process_files(download_folder=download_folder, pre_process_files_folder=pre_process_files_folder,table_id=table_id)
 
 
 @task
-def upload_to_gcs_task(bucket_name: str, dataset_id: str, table_id: str, download_folder: str):
+def upload_to_gcs_task(bucket_name: str, dataset_id: str, table_id: str, pre_process_files_folder: str):
     """
     Uploads the files from the specified download folder to Google Cloud Storage.
     
@@ -67,7 +67,7 @@ def upload_to_gcs_task(bucket_name: str, dataset_id: str, table_id: str, downloa
         bucket_name=bucket_name,
         dataset_id=dataset_id,
         table_id=table_id,
-        download_folder=download_folder,
+        pre_process_files_folder=pre_process_files_folder,
     )
 
 
